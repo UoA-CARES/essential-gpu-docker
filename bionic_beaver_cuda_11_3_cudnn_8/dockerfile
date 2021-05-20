@@ -1,0 +1,32 @@
+FROM nvidia/cuda:11.3.0-cudnn8-runtime-ubuntu18.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PATH="/root/miniconda3/bin:${PATH}"
+ARG PATH="/root/miniconda3/bin:${PATH}"
+
+WORKDIR /root
+
+RUN apt-get update && \
+    apt-get install -y build-essential cmake git wget curl lsb-release libjson-c-dev libwebsockets-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash && \
+    . ~/.bashrc && \
+    nvm install 6
+
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    mkdir /root/.conda && \
+    bash Miniconda3-latest-Linux-x86_64.sh -b && \
+    rm -f Miniconda3-latest-Linux-x86_64.sh 
+
+RUN curl -fsSL https://code-server.dev/install.sh | sh
+    
+RUN mkdir -p /root/cares_env && cd /root/cares_env && \
+    git clone https://github.com/tsl0922/ttyd.git && \
+    cd ttyd && mkdir build && cd build && \
+    cmake .. && \
+    make && make install
+
+COPY /commands.sh /root/cares_env/commands.sh
+RUN ["chmod", "+x", "/root/cares_env/commands.sh"]
+CMD /root/cares_env/commands.sh

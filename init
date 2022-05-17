@@ -69,6 +69,22 @@ sudo docker run -d --privileged --gpus all --name gpud140myuser1 -e USER=myuser1
 sudo docker run -d --privileged --gpus all --name gpud140myuser2 -e USER=myuser2 -e PASSWORD=pass2 -e HTTP_PASSWORD=pass2 -p 8444:8443 -p 6081:80 -p 5901:5900 -p 8090:8089 -v /dev/shm:/dev/shm -v /home/myuser2/workspace:/workspace --restart unless-stopped mycares/ubuntu-gpu-vnc:latest
 sudo docker run -d --privileged --gpus all --name gpud140myuser3 -e USER=myuser3 -e PASSWORD=pass3 -e HTTP_PASSWORD=pass3 -p 8445:8443 -p 6082:80 -p 5902:5900 -p 8091:8089 -v /dev/shm:/dev/shm -v /home/myuser3/workspace:/workspace --restart unless-stopped mycares/ubuntu-gpu-vnc:latest
 
+# Workspace folder for each user (ie, ‘/home/myuser1/workspace’ from the host computer) is mapped to ‘/workspace’ in the docker container. 
+# This means users can use the workspace to share files between host computer and its container. 
+# It’ll be useful to feed dataset to the container or get the trained model from the container.
+# Also, miniconda environment is setup for the python development, so users can easily have their own environments (ie, for detection, segmentation, nlp).
+
+# ID/Password - myuser1/pass1
+# web_vnc - ipaddress:6080
+# web_vscode - ipaddress:8443
+# web_terminal - ipaddress:8089
+# vpn - ipaddress:5900
+
+# ID/Password - myuser2/pass2
+# web_vnc - ipaddress:6081
+# web_vscode - ipaddress:8444
+# web_terminal - ipaddress:8090
+# vpn - ipaddress:5901
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------
 # update docker image

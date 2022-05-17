@@ -1,48 +1,32 @@
-# essential-gpu-docker
+# ubuntu-gpu-vnc
 
-Docker scripts for cuda-enabled ubuntu with essential libraries for DNN.
+ubuntu 20.04
+code-server
+novnc
+web terminal
 
-# Install Docker
-
-Follow the instructions from the official docker site (https://docs.docker.com/engine/install/ubuntu/)
-
-# Install Nvidia-Docker
-
-Follow the instruction from the official nvidia-docker site(
-https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
-
-# Build Docker Image
-
+# install nvidia-docker
 ```
-git clone https://github.com/UoA-CARES/essential-gpu-docker.git
-cd essential-gpu-docker/bionic_beaver_cuda_11_3_cudnn_8
-docker build . -t cares-bionic
+sudo apt install curl
+bash <(curl -Ls https://gist.githubusercontent.com/jlim262/779f5f63353016c3c7d744f128fc7a77/raw/eecf9c0648fd5e301064bf759c26c3231ef59e3c/nvidia_docker_install.sh)
+```
+
+# add user
+```
+sudo adduser myuser1 --gecos "myuser1,RoomNumber,WorkPhone,HomePhone" --disabled-password
+echo "myuser1:pass1" | sudo chpasswd
+sudo mkdir -p /home/myuser1/workspace
+sudo chown -R myuser1:myuser1 /home/myuser1/workspace
+sudo chmod 777 /home/myuser1/workspace
 ```
 
 # Run Docker
-
 ```
-nvidia-docker run --network host -it cares-bionic
+sudo docker run -d --privileged --gpus all --name gpud74myuser1 -e USER=myuser1 -e PASSWORD=pass1 -e HTTP_PASSWORD=pass1 -p 8443:8443 -p 6080:80 -p 5900:5900 -p 8089:8089 -v /dev/shm:/dev/shm -v /home/myuser1/workspace:/workspace --restart unless-stopped mycares/ubuntu-gpu-vnc:latest
 ```
 
 # Launch web terminal
+web_vnc - ipaddress:6080
+web_vscode - ipaddress:8443
+web_terminal - ipaddress:8089
 
-After running the docker, browse http://ipaddress:8089 to launch web terminal.
-
-# Launch web Visual Studio Code
-
-Visual Studio Code is a freeware source-code editor made by Microsoft for Windows, Linux and macOS. Features include support for debugging, syntax highlighting, intelligent code completion, snippets, code refactoring, and embedded Git.
-
-After running the docker, browse http://ipaddress:8088 to launch web Visual Studio Code.
-
-# Portainer
-
-Portainer is an open-source management UI for Docker, including Docker Swarm environment. Portainer makes it easier for you to manage your Docker containers, it allows you to manage containers, images, networks, and volumes from the web-based Portainer dashboard.
-
-```
-docker volume create portainer_data
-```
-
-```
-docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
-```

@@ -9,7 +9,7 @@ sudo apt install curl
 bash <(curl -Ls https://gist.githubusercontent.com/jlim262/779f5f63353016c3c7d744f128fc7a77/raw/eecf9c0648fd5e301064bf759c26c3231ef59e3c/nvidia_docker_install.sh)
 
 # 5. join the swarm
-sudo docker swarm join --token SWMTKN-1-4auwyl2w041bkx87ia9nliwyf7qnp9x9h8h069eexkiqm0ziqg-1yi522j4hy7vnkbehke9ssv8c 130.216.238.146:2377
+
 
 # 6. add user
 sudo adduser myuser1 --gecos "myuser1,RoomNumber,WorkPhone,HomePhone" --disabled-password

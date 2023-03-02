@@ -1,32 +1,102 @@
-# ubuntu-gpu-vnc
+For the administrator instruction, please visit [here](ADMINISTRATOR.md).
 
-ubuntu 20.04
-code-server
-novnc
-web terminal
+# Run docker
+Search dockers you want [here](https://hub.docker.com/).
 
-# install nvidia-docker
+For the quick review, 
 ```
-sudo apt install curl
-bash <(curl -Ls https://gist.githubusercontent.com/jlim262/779f5f63353016c3c7d744f128fc7a77/raw/eecf9c0648fd5e301064bf759c26c3231ef59e3c/nvidia_docker_install.sh)
+docker run hello-world
 ```
-
-# add user
+Check [nvidia/cuda](https://hub.docker.com/r/nvidia/cuda) dockerhub for more tags. 
 ```
-sudo adduser myuser1 --gecos "myuser1,RoomNumber,WorkPhone,HomePhone" --disabled-password
-echo "myuser1:pass1" | sudo chpasswd
-sudo mkdir -p /home/myuser1/workspace
-sudo chown -R myuser1:myuser1 /home/myuser1/workspace
-sudo chmod 777 /home/myuser1/workspace
+docker run nvidia/cuda:11.6.2-base-ubuntu20.04 nvidia-smi
 ```
 
-# Run Docker
+To list the running containers, simply execute the docker ps command, 
 ```
-sudo docker run -d --privileged --gpus all --name gpud74myuser1 -e USER=myuser1 -e PASSWORD=pass1 -e HTTP_PASSWORD=pass1 -p 8443:8443 -p 6080:80 -p 5900:5900 -p 8089:8089 -v /dev/shm:/dev/shm -v /home/myuser1/workspace:/workspace --restart unless-stopped mycares/ubuntu-gpu-vnc:latest
+docker ps
+```
+To include all the containers present on your Docker host, append the -a option, 
+```
+docker ps -a
+```
+To stop one or more running Docker containers, you can use the docker stop command
+```
+docker stop container-name
+```
+To start containers, 
+```
+docker start container-name
+```
+And you can kill containers. 
+```
+docker kill container-name
+```
+To run an interactive shell in a container
+```
+docker exec -it container-name sh
 ```
 
-# Launch web terminal
-web_vnc - ipaddress:6080
-web_vscode - ipaddress:8443
-web_terminal - ipaddress:8089
+Visit [the official docs](https://docs.docker.com/engine/reference/run/) to see all the docker commands and their options. 
+
+
+# Docker volume for the persistant data 
+[Youtube tutorial](https://www.youtube.com/watch?v=OrQLrqQm4M0)
+
+In the following example, we create a volume mapped to /home/myuser1/data path. This volume will be mounted in a container. 
+```
+docker volume create --name datastore --opt type=none --opt device=/home/myuser1/data --opt o=bind
+```
+To mount the volume to your container,
+```
+docker run --rm -it --mount source=datastore,target=/data gcr.io/kaggle-gpu-images/python /bin/bash
+```
+The volume(datastore) is mounded on /data in the container
+
+# (Optional) FileBrowser 
+Install [FileBrowser](https://filebrowser.org/installation) if you want to use web-based file browser instead termimal. 
+
+Create folder and files to use FileBrowser as a docker container. 
+```
+mkdir filebrowser
+cd filebrowser/
+touch docker-compose.yml
+touch filebrowser.db
+```
+
+Check your uid/gid. We'll use uid/gid for docker-compose.yml.
+```
+id
+```
+
+We need to edit docker-compose.yml. 
+```
+nano docker-compose.yml 
+```
+
+Use your uid:gid instead '1001:1001'. And use your userid instead 'myuser1'. 
+```
+version: '3'
+services:
+  file-browser:
+    image: filebrowser/filebrowser
+    container_name: file-browser
+    user: 1001:1001
+    ports:
+      - 8082:80
+    volumes:
+      - /home/myuser1/:/srv
+      - /home/myuser1/filebrowser/filebrowser.db:/database.db
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+```
+And run the docker-compose. 
+```
+docker-compose up -d
+```
+Visit http://localhost:8082 to access FileBrowser. 
+
+
+
 

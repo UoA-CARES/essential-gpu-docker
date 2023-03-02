@@ -34,17 +34,30 @@ if [ "$USER" != "root" ]; then
     cp -r /root/{.config,.gtkrc-2.0,.asoundrc} ${HOME}
     chown -R $USER:$USER ${HOME}
     [ -d "/dev/snd" ] && chgrp -R adm /dev/snd
-    if [ ! -x "$HOME/miniconda" ]; then
+    # if [ ! -x "$HOME/miniconda" ]; then
+    #     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    #     chmod +x Miniconda3-latest-Linux-x86_64.sh
+    #     ./Miniconda3-latest-Linux-x86_64.sh -b
+    #     rm -f Miniconda3-latest-Linux-x86_64.sh
+    #     ${HOME}/miniconda3/bin/conda init
+    #     source ${HOME}/.bashrc
+    #     chown -R $USER:$USER /workspace
+    # fi
+    
+fi
+
+if [ ! -d "$HOME/miniconda" ]; then
         wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
         chmod +x Miniconda3-latest-Linux-x86_64.sh
         ./Miniconda3-latest-Linux-x86_64.sh -b
         rm -f Miniconda3-latest-Linux-x86_64.sh
         ${HOME}/miniconda3/bin/conda init
         source ${HOME}/.bashrc
-        chown -R $USER:$USER /workspace
-    fi
-    
+        # pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
+        # chown -R $USER:$USER /workspace
 fi
+
+
 sed -i -e "s|%USER%|$USER|" -e "s|%HOME%|$HOME|" /etc/supervisor/conf.d/supervisord.conf
 
 # home folder

@@ -1,22 +1,30 @@
-For the administrator instruction, please visit [here](ADMINISTRATOR.md).
+(For the administrator instruction, please visit [here](ADMINISTRATOR.md).)
 
-# Instruction to use GPU Machines
+# Instruction to use Workstations
+(Important) Contact your supervisor first to [make bookings](https://docs.google.com/spreadsheets/d/1zhHadk0wmTiC-7sPKSpjd_AZx0OvK8aj4Ujtha3rbNA/edit?usp=sharing)
 
-## List of GPU Machines
-| IP             | GPU Driver  | CUDA | GPU          | GPU Mem  |
-| -------------- | ----------- | ---- | ------------ | -------- |
-| 130.216.238.11 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
+## List of GPU Workstations
+| Name    | IP             | OS           | GPU Driver  | CUDA | GPU          | GPU Mem  |
+| ------  | -------------- | ------------ | ----------- | ---- | ------------ | -------- |
+| P6000-1 | 130.216.238.11 | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
+| P6000-2 | 130.216.238.xx | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
+| P6000-3 | 130.216.238.xx | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
+| P6000-4 | 130.216.238.xx | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
 
+--- 
 
-## Login GPU Machines
-Use ssh to connect a gpu machine. You're required to use vpn to access gpu machines outside of uni network. (Contact ITS)
-Use myuser1/pass1 as username/password. 
+## Connect to the Workstation Remotely using SSH
+You can use an SSH client such as Terminal (in macOS) or Command
+Prompt (in Windows), on your local machine. Your local machine must be connected to the UoA network (either via Wi-Fi or Ethernet cable). You need to connect to the UoA’s VPN if you are off-campus. If Open SSH is not installed in your Windows OS, you need to add it as explained [here](https://ittutorials.net/microsoft/windows-10/enable-ssh-windows-10-command-prompt/). Alternatively, you can use other ssh clients, such as [PuttySSH](https://www.putty.org/).
+
+Currently we're using a shared account(myuser1/pass1). Open your terminal and type the following command. We assume you have an active booking for the workstation. ([Booking spreadsheet](https://docs.google.com/spreadsheets/d/1zhHadk0wmTiC-7sPKSpjd_AZx0OvK8aj4Ujtha3rbNA/edit?usp=sharing))
 ```
 ssh myuser1@130.216.238.11
 ```
 
+---
 
-## Run docker
+## Use docker for training your model
 Search dockers you want [here](https://hub.docker.com/).
 
 For the quick review, 
@@ -55,6 +63,9 @@ docker exec -it container-name sh
 
 Visit [the official docs](https://docs.docker.com/engine/reference/run/) to see all the docker commands and their options. 
 
+Visit [the docker image recommendation page](RECOMMENDATIONS.md) to find images used in the lab. 
+
+---
 
 ## Docker volume for the persistant data 
 [Youtube tutorial](https://www.youtube.com/watch?v=OrQLrqQm4M0)
@@ -68,6 +79,8 @@ To mount the volume to your container,
 docker run --rm -it --mount source=datastore,target=/data gcr.io/kaggle-gpu-images/python /bin/bash
 ```
 The volume(datastore) is mounded on /data in the container
+
+---
 
 # (Optional) FileBrowser 
 Install [FileBrowser](https://filebrowser.org/installation) to transfer files if you want to use web-based file browser instead termimal. 

@@ -59,3 +59,17 @@ We use Portrainer to manage docker containers. Run the Portainer as a docker and
 ```
 docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
 ```
+
+We can easily monitor and manage all the containers, images, networks and volumes on the web. 
+Home:
+![home](screenshot/portainer1.png)
+Dashboard:
+![dashboard](screenshot/portainer2.png)
+Containers:
+![containers](screenshot/portainer3.png)
+Container details:
+![container details](screenshot/portainer4.png)
+Container logs:
+![container logs](screenshot/portainer5.png)
+Container console:
+![container console](screenshot/portainer6.png)

@@ -1,6 +1,22 @@
 For the administrator instruction, please visit [here](ADMINISTRATOR.md).
 
-# Run docker
+# Instruction to use GPU Machines
+
+## List of GPU Machines
+| IP             | GPU Driver  | CUDA | GPU          | GPU Mem  |
+| -------------- | ----------- | ---- | ------------ | -------- |
+| 130.216.238.11 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
+
+
+## Login GPU Machines
+Use ssh to connect a gpu machine. You're required to use vpn to access gpu machines outside of uni network. (Contact ITS)
+Use myuser1/pass1 as username/password. 
+```
+ssh myuser1@130.216.238.11
+```
+
+
+## Run docker
 Search dockers you want [here](https://hub.docker.com/).
 
 For the quick review, 
@@ -40,10 +56,10 @@ docker exec -it container-name sh
 Visit [the official docs](https://docs.docker.com/engine/reference/run/) to see all the docker commands and their options. 
 
 
-# Docker volume for the persistant data 
+## Docker volume for the persistant data 
 [Youtube tutorial](https://www.youtube.com/watch?v=OrQLrqQm4M0)
 
-In the following example, we create a volume mapped to /home/myuser1/data path. This volume will be mounted in a container. 
+In the following example, we create a volume mapped to /home/myuser1/data path. This volume will be mounted in a container. So you can share data between containers. 
 ```
 docker volume create --name datastore --opt type=none --opt device=/home/myuser1/data --opt o=bind
 ```
@@ -54,7 +70,7 @@ docker run --rm -it --mount source=datastore,target=/data gcr.io/kaggle-gpu-imag
 The volume(datastore) is mounded on /data in the container
 
 # (Optional) FileBrowser 
-Install [FileBrowser](https://filebrowser.org/installation) if you want to use web-based file browser instead termimal. 
+Install [FileBrowser](https://filebrowser.org/installation) to transfer files if you want to use web-based file browser instead termimal. 
 
 Create folder and files to use FileBrowser as a docker container. 
 ```
@@ -95,8 +111,9 @@ And run the docker-compose.
 ```
 docker-compose up -d
 ```
-Visit http://localhost:8082 to access FileBrowser. 
+Visit http://ipaddress:8082 to access FileBrowser. 
 
-
+Screenshot:
+![home](screenshot/filebrowser1.png)
 
 

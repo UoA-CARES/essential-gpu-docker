@@ -8,7 +8,6 @@ You can add a user(myuser1/pass1) as follows. You can change id(myuser1) and pas
 ```
 sudo adduser myuser1 --gecos "myuser1,RoomNumber,WorkPhone,HomePhone" --disabled-password
 echo "myuser1:pass1" | sudo chpasswd
-sudo usermod -aG docker myuser1
 ```
 
 # Install openssh-server
@@ -23,6 +22,10 @@ ssh username@ipaddress
 # Install Nvidia Docker
 - Install Docker CE (https://docs.docker.com/engine/install/ubuntu/)
 - Install Nvidia Docker (https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+- Add the user into the docker group
+```
+sudo usermod -aG docker myuser1
+```
 
 Now, you can try the following command. 
 ```

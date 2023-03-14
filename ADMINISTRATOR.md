@@ -22,6 +22,10 @@ ssh username@ipaddress
 # Install Nvidia Docker
 - Install Docker CE (https://docs.docker.com/engine/install/ubuntu/)
 - Install Nvidia Docker (https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+- Install Docker Compose
+```
+sudo apt install docker-compose
+```
 - Add the user into the docker group
 ```
 sudo usermod -aG docker myuser1

@@ -124,7 +124,7 @@ And run the docker-compose.
 ```
 docker-compose up -d
 ```
-Visit http://ipaddress:8082 to access FileBrowser. 
+Visit http://ipaddress:8082 to access FileBrowser. Default id/password is admin/admin
 
 Screenshot:
 ![home](screenshot/filebrowser1.png)

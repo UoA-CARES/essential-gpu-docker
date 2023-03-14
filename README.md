@@ -4,12 +4,12 @@
 (Important) Contact your supervisor first to [make bookings](https://docs.google.com/spreadsheets/d/1zhHadk0wmTiC-7sPKSpjd_AZx0OvK8aj4Ujtha3rbNA/edit?usp=sharing)
 
 ## List of GPU Workstations
-| Name    | IP             | OS           | GPU Driver  | CUDA | GPU          | GPU Mem  |
-| ------  | -------------- | ------------ | ----------- | ---- | ------------ | -------- |
-| P6000-1 | 130.216.238.11 | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
-| P6000-2 | 130.216.238.xx | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
-| P6000-3 | 130.216.238.xx | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
-| P6000-4 | 130.216.238.xx | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
+| Name    | IP              | OS           | GPU Driver  | CUDA | GPU          | GPU Mem  |
+| ------  | --------------- | ------------ | ----------- | ---- | ------------ | -------- |
+| P6000-1 | 130.216.238.11  | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
+| P6000-2 | 130.216.238.182 | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
+| P6000-3 | 130.216.238.xx  | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
+| P6000-4 | 130.216.238.xx  | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
 
 --- 
 

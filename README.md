@@ -4,12 +4,12 @@
 (Important) Contact your supervisor first to [make bookings](https://docs.google.com/spreadsheets/d/1zhHadk0wmTiC-7sPKSpjd_AZx0OvK8aj4Ujtha3rbNA/edit?usp=sharing)
 
 ## List of GPU Workstations
-| Name    | IP              | OS           | GPU Driver  | CUDA | GPU          | GPU Mem  |
-| ------  | --------------- | ------------ | ----------- | ---- | ------------ | -------- |
-| P6000-1 | 130.216.238.11  | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
-| P6000-2 | 130.216.238.182 | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
-| P6000-3 | 130.216.238.xx  | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
-| P6000-4 | 130.216.238.xx  | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
+| Name                | IP              | OS           | GPU Driver  | CUDA | GPU          | GPU Mem  |
+| ------------------  | --------------- | ------------ | ----------- | ---- | ------------ | -------- |
+| P6000-1 (UOA370131) | 130.216.238.11  | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
+| P6000-2 (UOA370132) | 130.216.238.xx  | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
+| P6000-3 (UOA370133) | 130.216.238.xx  | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
+| P6000-4 (UOA370142) | 130.216.238.182 | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
 
 --- 
 
@@ -24,6 +24,21 @@ ssh myuser1@130.216.238.11
 
 ---
 
+## Transfer Data to Workstations
+There are multiple ways to transfer your data between your local machine and the workstations. A simple way is via an FTP Client such as [FileZila Client](https://filezilla-project.org/):
+![home](screenshot/filezilla.png)
+
+Or a web-based filebrowser can be used. Visit http://ipaddress:8082 to access FileBrowser. Default id/password is admin/admin.
+![home](screenshot/filebrowser1.png)
+
+Upload your training data into /home/$USER/data which is already mapped to docker volume, so it can be mounted to docker containers. Try the following command, and upload files into /home/$USER/data using FileZila or FileBrowser. You should see those files /data of the container. 
+
+```
+docker run --rm -it -runtime=nvidia --mount source=datastore,target=/data nvidia/cuda:11.6.2-base-ubuntu20.04 /bin/bash
+```
+
+---
+
 ## Use docker for training your model
 Search dockers you want [here](https://hub.docker.com/).
 
@@ -33,7 +48,7 @@ docker run hello-world
 ```
 Check [nvidia/cuda](https://hub.docker.com/r/nvidia/cuda) dockerhub for more tags. 
 ```
-docker run nvidia/cuda:11.6.2-base-ubuntu20.04 nvidia-smi
+docker run -runtime=nvidia nvidia/cuda:11.6.2-base-ubuntu20.04 nvidia-smi
 ```
 
 To list the running containers, simply execute the docker ps command, 
@@ -61,72 +76,26 @@ To run an interactive shell in a container
 docker exec -it container-name sh
 ```
 
+(WIP) Add more practical examples !
+
 Visit [the official docs](https://docs.docker.com/engine/reference/run/) to see all the docker commands and their options. 
 
 Visit [the docker image recommendation page](RECOMMENDATIONS.md) to find images used in the lab. 
 
 ---
 
-## Docker volume for the persistant data 
+## Share data between containers 
 [Youtube tutorial](https://www.youtube.com/watch?v=OrQLrqQm4M0)
 
-In the following example, we create a volume mapped to /home/myuser1/data path. This volume will be mounted in a container. So you can share data between containers. 
+In the following example, we create a volume mapped to /home/$USER/mydata path. This volume will be mounted in a container. So you can share data between containers. 
 ```
-docker volume create --name datastore --opt type=none --opt device=/home/myuser1/data --opt o=bind
+docker volume create --name mydatastore --opt type=none --opt device=/home/$USER/mydata --opt o=bind
 ```
 To mount the volume to your container,
 ```
-docker run --rm -it --mount source=datastore,target=/data gcr.io/kaggle-gpu-images/python /bin/bash
+docker run --rm -it -runtime=nvidia --mount source=mydatastore,target=/mydata nvidia/cuda:11.6.2-base-ubuntu20.04 /bin/bash
 ```
-The volume(datastore) is mounded on /data in the container
+The volume(mydatastore) is mounded on /data in the container
 
 ---
-
-# (Optional) FileBrowser 
-Install [FileBrowser](https://filebrowser.org/installation) to transfer files if you want to use web-based file browser instead termimal. 
-
-Create folder and files to use FileBrowser as a docker container. 
-```
-mkdir filebrowser
-cd filebrowser/
-touch docker-compose.yml
-touch filebrowser.db
-```
-
-Check your uid/gid. We'll use uid/gid for docker-compose.yml.
-```
-id
-```
-
-We need to edit docker-compose.yml. 
-```
-nano docker-compose.yml 
-```
-
-Use your uid:gid instead '1001:1001'. And use your userid instead 'myuser1'. 
-```
-version: '3'
-services:
-  file-browser:
-    image: filebrowser/filebrowser
-    container_name: file-browser
-    user: 1001:1001
-    ports:
-      - 8082:80
-    volumes:
-      - /home/myuser1/:/srv
-      - /home/myuser1/filebrowser/filebrowser.db:/database.db
-    restart: unless-stopped
-    security_opt:
-      - no-new-privileges:true
-```
-And run the docker-compose. 
-```
-docker-compose up -d
-```
-Visit http://ipaddress:8082 to access FileBrowser. Default id/password is admin/admin
-
-Screenshot:
-![home](screenshot/filebrowser1.png)
-
 

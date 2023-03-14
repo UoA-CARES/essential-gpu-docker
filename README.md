@@ -48,7 +48,7 @@ docker run hello-world
 ```
 Check [nvidia/cuda](https://hub.docker.com/r/nvidia/cuda) dockerhub for more tags. 
 ```
-docker run -runtime=nvidia nvidia/cuda:11.6.2-base-ubuntu20.04 nvidia-smi
+docker run --runtime=nvidia nvidia/cuda:11.6.2-base-ubuntu20.04 nvidia-smi
 ```
 
 To list the running containers, simply execute the docker ps command, 
@@ -93,7 +93,7 @@ docker volume create --name mydatastore --opt type=none --opt device=/home/$USER
 ```
 To mount the volume to your container,
 ```
-docker run --rm -it -runtime=nvidia --mount source=mydatastore,target=/mydata nvidia/cuda:11.6.2-base-ubuntu20.04 /bin/bash
+docker run --rm -it --runtime=nvidia --mount source=mydatastore,target=/mydata nvidia/cuda:11.6.2-base-ubuntu20.04 /bin/bash
 ```
 The volume(mydatastore) is mounded on /data in the container
 

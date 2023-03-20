@@ -62,14 +62,6 @@ docker run --rm --gpus all nvidia/cuda:11.6.2-base-ubuntu20.04 nvidia-smi
 ```
 You shuold see the output of nvidia-smi. 
 
-# Default Docker volume for the persistant data 
-[Youtube tutorial](https://www.youtube.com/watch?v=OrQLrqQm4M0)
-
-We create a volume mapped to /home/myuser1/data path. This volume will be mounted in a container. So you can share data between containers. 
-```
-docker volume create --name datastore --opt type=none --opt device=/home/myuser1/data --opt o=bind
-```
-
 # Install Portrainer 
 We use Portrainer to manage docker containers. Run the Portainer as a docker and visit https://localhost:9443 to set the admin account. 
 ```
@@ -91,8 +83,27 @@ Container console:
 ![container console](screenshot/portainer6.png)
 
 
+# Default Docker volume for the persistant data 
+[Youtube tutorial](https://www.youtube.com/watch?v=OrQLrqQm4M0)
+
+First,we need to connect to the machine with myuser1 account.
+```
+ssh myuser1@localhost
+```
+
+We create a volume mapped to /home/myuser1/data path. This volume will be mounted in a container. So you can share data between containers. 
+```
+docker volume create --name datastore --opt type=none --opt device=/home/myuser1/data --opt o=bind
+```
+
 # (Optional) Install FileBrowser for a user
 Install [FileBrowser](https://filebrowser.org/installation) to transfer files if you want to use web-based file browser instead termimal. 
+
+
+First,we need to connect to the machine with myuser1 account.
+```
+ssh myuser1@localhost
+```
 
 Create folder and files to use FileBrowser as a docker container. 
 ```

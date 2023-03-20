@@ -12,6 +12,7 @@ echo "myuser1:pass1" | sudo chpasswd
 
 # Install openssh-server
 ```
+sudo apt update
 sudo apt install openssh-server
 ```
 Now, you can connect the system using ssh. 

@@ -93,6 +93,7 @@ ssh myuser1@localhost
 
 We create a volume mapped to /home/myuser1/data path. This volume will be mounted in a container. So you can share data between containers. 
 ```
+mkdir /home/myuser1/data
 docker volume create --name datastore --opt type=none --opt device=/home/myuser1/data --opt o=bind
 ```
 

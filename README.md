@@ -72,7 +72,7 @@ The **'/home/$USER/data'** directory on the workstation is intended for sharing 
 
 To upload your training dataset to the workstation, use FileZilla or scp to transfer the files to the '/home/$USER/data' directory. Once the data is uploaded, you can access it from the '/data' directory within the container.
 
-For instance, you can start a container by following the steps below.
+For instance, you can start a container by following the command below.
 ```bash
 # You should execute the following command on the workstation.
 docker run --rm -it --runtime=nvidia --mount source=datastore,target=/data nvidia/cuda:11.6.2-devel-ubuntu20.04 /bin/bash

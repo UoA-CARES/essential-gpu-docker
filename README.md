@@ -91,7 +91,7 @@ ls /data
 
 https://hub.docker.com/repositories/mycares
 
-Docker images have been created for internal purposes that support the Nvidia CUDA toolkit.
+Docker images supporting the Nvidia CUDA toolkit have been created for internal purposes.
 
 
 ### Pytorch 1.13 (Cuda 11.6)

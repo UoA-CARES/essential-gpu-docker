@@ -1,7 +1,7 @@
 (For the administrator instruction, please visit [here](ADMINISTRATOR.md).)
 
 # Instructions to use Workstations
-**(Important) Before [making any bookings]((https://docs.google.com/spreadsheets/d/1zhHadk0wmTiC-7sPKSpjd_AZx0OvK8aj4Ujtha3rbNA/edit?usp=sharing)), please contact your supervisor for approval.**
+**(Important) Before [making any bookings](https://docs.google.com/spreadsheets/d/1zhHadk0wmTiC-7sPKSpjd_AZx0OvK8aj4Ujtha3rbNA/edit?usp=sharing), please contact your supervisor for approval.**
 
 ## List of GPU Workstations
 The robotics lab houses these workstations. If you have access to the lab, you can utilize these machines on-site.

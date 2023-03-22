@@ -101,7 +101,7 @@ The expected output/messages should be as follows.
 
 ---
 
-## Default shared folder between workstation and containers
+## How to share data between the workstation and containers
 
 The **'/home/$USER/data'** directory on the workstation is intended for sharing data between the workstation and containers. This directory is already mapped to a Docker volume, allowing the data to be accessed from Docker containers. You can use this directory to share training dataset between the workstation and containers. To use this volume, add the following options when starting a container:
 ```

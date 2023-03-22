@@ -344,12 +344,14 @@ ls /mydata
 
 Simply, restart your container. 
 
-```
+```bash
+# You should execute the following command on the workstation.
 docker restart container-name
 docker exec -it container-name /bin/bash
 ```
 And try 'nvidia-smi' within your container.  
-```
+```bash
+# You should execute the following command within the container.
 nvidia-smi
 ```
 

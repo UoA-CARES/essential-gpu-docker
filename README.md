@@ -318,7 +318,7 @@ Visit [the docker image recommendation page](RECOMMENDATIONS.md) to find images 
 ## How to create a persistent volume
 [Youtube tutorial](https://www.youtube.com/watch?v=OrQLrqQm4M0)
 
-By creating a Docker volume for persistent data, it is possible to share information between the workstation and containers.
+By creating a Docker volume for persistent data, it is possible to share data between the workstation and containers.
 
 In the following example, we create a volume mapped to /home/$USER/mydata path. This volume will be mounted in a container. So you can share data between containers. 
 ```bash

@@ -322,8 +322,8 @@ By creating a Docker volume for persistent data, it is possible to share informa
 
 In the following example, we create a volume mapped to /home/$USER/mydata path. This volume will be mounted in a container. So you can share data between containers. 
 ```bash
-# the following commands should be run in workstation
-mkdir mydata
+# You should execute the following command on the workstation.
+mkdir /home/$USER/mydata
 docker volume create --name mydatastore --opt type=none --opt device=/home/$USER/mydata --opt o=bind
 ```
 

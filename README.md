@@ -71,13 +71,15 @@ To incorporate GPU resources within the container, include the following options
 ```
 
 For instance, you can start a container by following the command below.
-```
+```bash
+# You should execute the following command on the workstation.
 docker run --rm -it --runtime=nvidia -v /dev/shm:/dev/shm nvidia/cuda:11.6.2-devel-ubuntu20.04 /bin/bash
 ```
 
 To confirm whether your container has access to the GPU resources on the host machine, you can execute the command below:
 
-```
+```bash
+# You should execute the following command within the container.
 nvidia-smi
 ```
 
@@ -313,8 +315,10 @@ Visit [the docker image recommendation page](RECOMMENDATIONS.md) to find images 
 
 ---
 
-## Share data between containers 
+## How to create a persistent volume
 [Youtube tutorial](https://www.youtube.com/watch?v=OrQLrqQm4M0)
+
+By creating a Docker volume for persistent data, it is possible to share information between the workstation and containers.
 
 In the following example, we create a volume mapped to /home/$USER/mydata path. This volume will be mounted in a container. So you can share data between containers. 
 ```bash
@@ -322,6 +326,7 @@ In the following example, we create a volume mapped to /home/$USER/mydata path. 
 mkdir mydata
 docker volume create --name mydatastore --opt type=none --opt device=/home/$USER/mydata --opt o=bind
 ```
+
 To mount the volume to your container,
 ```bash
 # You should execute the following command on the workstation.

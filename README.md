@@ -1,7 +1,7 @@
 (For the administrator instruction, please visit [here](ADMINISTRATOR.md).)
 
 # Instructions to use Workstations
-**(Important) Before [making any bookings](https://docs.google.com/spreadsheets/d/1zhHadk0wmTiC-7sPKSpjd_AZx0OvK8aj4Ujtha3rbNA/edit?usp=sharing), please contact your supervisor for approval.**
+**(Important) Before [making any bookings](https://docs.google.com/spreadsheets/d/1zhHadk0wmTiC-7sPKSpjd_AZx0OvK8aj4Ujtha3rbNA/edit?usp=sharing), please contact your supervisor for approval.** If you require space in the lab, you have the option to [book a hot desk](https://docs.google.com/spreadsheets/d/16roMJnZQagsN7I5vJj-z6_1oq_aH4012/edit?usp=sharing&ouid=113035994987226744270&rtpof=true&sd=true).
 
 ## List of GPU Workstations
 The robotics lab houses these workstations. If you have access to the lab, you can utilize these machines on-site.

@@ -21,8 +21,34 @@ To connect to the workstations remotely, you will need to use an SSH client, suc
 To obtain an account for the workstations, please reach out to your supervisor. Once you have an [active booking](https://docs.google.com/spreadsheets/d/1zhHadk0wmTiC-7sPKSpjd_AZx0OvK8aj4Ujtha3rbNA/edit?usp=sharing) for the workstation, open your terminal and enter the following command.
 ```bash
 # You should execute the following command on your local machine.
-ssh username@ipaddress
+ssh username@IP-address-of-workstation
 ```
+
+### Connect ssh without password
+To connect to SSH without a password, you will need to set up SSH key authentication between the client machine (where you are connecting from) and the server machine (where you are connecting to). Here are the general steps to follow:
+
+1. Generate an SSH key pair on the client machine. This can be done using the following command:
+```bash
+# You should execute the following command on your local machine.
+ssh-keygen
+```
+This will generate a public key file (usually named id_rsa.pub) and a private key file (usually named id_rsa) in the ~/.ssh/ directory.
+
+2. Copy the public key to the server machine. You can do this using the ssh-copy-id command, which will copy the public key to the server's authorized keys file:
+```bash
+# You should execute the following command on your local machine.
+ssh-copy-id username@IP-address-of-workstation
+```
+
+This will prompt you for the server password, and then add your public key to the server's ~/.ssh/authorized_keys file.
+3. Test the connection. You should now be able to connect to the server without a password by running:
+```bash
+# You should execute the following command on your local machine.
+ssh username@IP-address-of-workstation
+```
+This should log you into the server without prompting for a password.
+
+
 
 ---
 

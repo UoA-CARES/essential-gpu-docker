@@ -75,7 +75,7 @@ To upload your training dataset to the workstation, use FileZilla or scp to tran
 For instance, you can start a container by following the command below.
 ```bash
 # You should execute the following command on the workstation.
-docker run --rm -it --runtime=nvidia --mount source=datastore,target=/data nvidia/cuda:11.6.2-devel-ubuntu20.04 /bin/bash
+docker run --rm -it --runtime=nvidia -v /dev/shm:/dev/shm --mount source=datastore,target=/data nvidia/cuda:11.6.2-devel-ubuntu20.04 /bin/bash
 ```
 
 Upload any data to the '/home/$USER/data' directory, and you should be able to see those files in the '/data' folder within the container.
@@ -107,7 +107,7 @@ Next, start a container by running the following command.
 
 ```bash
 # You should execute the following command on the workstation.
-docker run -it --runtime=nvidia --mount source=datastore,target=/data mycares/detectron2:2023.03.21 /bin/bash
+docker run -it --runtime=nvidia -v /dev/shm:/dev/shm --mount source=datastore,target=/data mycares/detectron2:2023.03.21 /bin/bash
 ```
 
 After connecting to the container, activate the Conda environment for PyTorch.
@@ -136,7 +136,7 @@ Next, start a container by running the following command.
 
 ```bash
 # You should execute the following command on the workstation.
-docker run -it --runtime=nvidia --mount source=datastore,target=/data mycares/detectron2:2023.03.21 /bin/bash
+docker run -it --runtime=nvidia -v /dev/shm:/dev/shm --mount source=datastore,target=/data mycares/detectron2:2023.03.21 /bin/bash
 ```
 
 Once connected to the container, activate the conda environment for detectron2. 
@@ -248,11 +248,11 @@ Use run command to have a container.
 docker run hello-world
 ```
 
-Add **--runtime==nvidia** option to have gpu resource in the container.
+Add **--runtime==nvidia -v /dev/shm:/dev/shm** option to have gpu resource in the container.
 
 ```bash
 # You should execute the following command on the workstation.
-docker run --runtime=nvidia nvidia/cuda:11.6.2-devel-ubuntu20.04 nvidia-smi
+docker run --runtime=nvidia -v /dev/shm:/dev/shm nvidia/cuda:11.6.2-devel-ubuntu20.04 nvidia-smi
 ```
 
 You can exit the session of the container. 
@@ -287,14 +287,29 @@ docker volume create --name mydatastore --opt type=none --opt device=/home/$USER
 To mount the volume to your container,
 ```bash
 # You should execute the following command on the workstation.
-docker run -it --runtime=nvidia --mount source=mydatastore,target=/mydata nvidia/cuda:11.6.2-devel-ubuntu20.04 /bin/bash
+docker run -it --runtime=nvidia -v /dev/shm:/dev/shm --mount source=mydatastore,target=/mydata nvidia/cuda:11.6.2-devel-ubuntu20.04 /bin/bash
 ```
 
 The volume(mydatastore) is mounded on /mydata in the container. 
 ```bash
 # You should execute the following command within the container.
-ls /data
+ls /mydata
 ```
+
+# FAQ
+### 'nvidia-smi' gives 'Failed to initialize NVML: Unknown Error'
+
+Simply, restart your container. 
+
+```
+docker restart container-name
+docker exec -it container-name /bin/bash
+```
+And try 'nvidia-smi' within your container.  
+```
+nvidia-smi
+```
+
 
 ---
 

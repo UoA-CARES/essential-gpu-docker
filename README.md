@@ -107,7 +107,7 @@ Next, start a container by running the following command.
 
 ```bash
 # You should execute the following command on the workstation.
-docker run -it --runtime=nvidia --mount source=datastore,target=/data mycares/detectron2:2023.03.21 /bin/bash
+docker run -it --runtime=nvidia -v /dev/shm:/dev/shm --mount source=datastore,target=/data mycares/detectron2:2023.03.21 /bin/bash
 ```
 
 After connecting to the container, activate the Conda environment for PyTorch.
@@ -136,7 +136,7 @@ Next, start a container by running the following command.
 
 ```bash
 # You should execute the following command on the workstation.
-docker run -it --runtime=nvidia --mount source=datastore,target=/data mycares/detectron2:2023.03.21 /bin/bash
+docker run -it --runtime=nvidia -v /dev/shm:/dev/shm --mount source=datastore,target=/data mycares/detectron2:2023.03.21 /bin/bash
 ```
 
 Once connected to the container, activate the conda environment for detectron2. 

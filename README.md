@@ -63,6 +63,40 @@ That's it! You can use similar commands to transfer files from the remote machin
 
 --- 
 
+## Enable GPU resource utilization for your container
+
+To incorporate GPU resources within the container, include the following options: --runtime==nvidia -v /dev/shm:/dev/shm.
+
+```
+docker run --rm -it --runtime=nvidia -v /dev/shm:/dev/shm nvidia/cuda:11.6.2-devel-ubuntu20.04 /bin/bash
+```
+
+To confirm whether your container has access to the GPU resources on the host machine, you can execute the command below:
+
+```
+nvidia-smi
+```
+
+The expected output/messages should be as follows.
+
+```
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 510.108.03   Driver Version: 510.108.03   CUDA Version: 11.6     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Quadro P6000        Off  | 00000000:03:00.0 Off |                  Off |
+| 26%   28C    P8     9W / 250W |    200MiB / 24576MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+```
+
+
+
+---
+
 ## Default shared folder between workstation and containers
 
 The **'/home/$USER/data'** directory on the workstation is intended for sharing data between the workstation and containers. This directory is already mapped to a Docker volume, allowing the data to be accessed from Docker containers. You can use this directory to share training dataset between the workstation and containers. To use this volume, add the following options when starting a container:

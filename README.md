@@ -65,8 +65,12 @@ That's it! You can use similar commands to transfer files from the remote machin
 
 ## Enable GPU resource utilization for your container
 
-To incorporate GPU resources within the container, include the following options: --runtime==nvidia -v /dev/shm:/dev/shm.
+To incorporate GPU resources within the container, include the following options: 
+```
+--runtime==nvidia -v /dev/shm:/dev/shm.
+```
 
+For instance, you can start a container by following the command below.
 ```
 docker run --rm -it --runtime=nvidia -v /dev/shm:/dev/shm nvidia/cuda:11.6.2-devel-ubuntu20.04 /bin/bash
 ```

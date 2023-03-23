@@ -1,3 +1,5 @@
+# **[Setting up SSH key authentication](https://github.com/UoA-CARES/essential-gpu-docker#connect-ssh-without-password) prior to following the instructions below.**
+
 ## Install VS Code
 
 1. Download the installation package for your operating system from the official VS Code website: https://code.visualstudio.com/download
@@ -9,6 +11,8 @@
 4. Once the installation is complete, open VS Code by double-clicking on the application icon. You should see the welcome screen with various options to start a new project or open an existing one.
 
 5. You can now start using VS Code for your coding and development needs. To enhance the functionality of VS Code, you can install various extensions from the Visual Studio Marketplace.
+
+---
 
 ## Install Remote Development extention for VS Code
 
@@ -32,6 +36,8 @@
 
 10. Once the connection is established, you can use VS Code as normal, with the added functionality of being able to work remotely on other machines or environments.
 
+---
+
 ## Connect to a remote SSH Server using VS Code
 
 1. Open VS Code on your local machine.
@@ -49,6 +55,8 @@
 7. Click the "Connect" button to establish the SSH connection. You may be prompted to enter your password or passphrase if necessary.
 
 8. Once the connection is established, VS Code will create a new window that is connected to the remote server. You can now use VS Code to edit files, run commands, and perform other tasks on the remote server, just as if you were working locally.
+
+---
 
 ## Connect to a docker container in a remote SSH Server
 
@@ -71,6 +79,8 @@
 
 6. Once the connection is established, you can start developing code inside the container just as you would on your local machine.
 
+---
+
 ## Install Python extension for the remote container 
 
 To set up a Python development environment for remote container in VS Code, you'll need to install the Python extension for VS Code. Follow these steps:
@@ -84,3 +94,6 @@ To set up a Python development environment for remote container in VS Code, you'
 4. Wait for the installation to finish, and then restart VS Code.
 
 5. Once VS Code has restarted, you should now have access to the Python extension. You can verify this by going to the Extensions sidebar again and checking that the Python extension is installed and enabled.
+
+---
+

@@ -70,3 +70,17 @@
 ![vscode](screenshot/select_container.png)
 
 6. Once the connection is established, you can start developing code inside the container just as you would on your local machine.
+
+## Install Python extension for the remote container 
+
+To set up a Python development environment for remote container in VS Code, you'll need to install the Python extension for VS Code. Follow these steps:
+
+1. Open VS Code and click on the Extension icon on the left sidebar.
+
+2. In the search bar, type "Python" and press Enter.
+
+3. The first search result should be "Python" by Microsoft. Click on the "Install in Container" button next to it.
+
+4. Wait for the installation to finish, and then restart VS Code.
+
+5. Once VS Code has restarted, you should now have access to the Python extension. You can verify this by going to the Extensions sidebar again and checking that the Python extension is installed and enabled.

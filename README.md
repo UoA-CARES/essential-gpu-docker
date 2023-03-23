@@ -222,7 +222,7 @@ Visit [the docker image recommendation page](RECOMMENDATIONS.md) to find images 
 ## **(Strongly Recommend) Setup a remote development environment**
 
 ### **Visual Studio Code**
-With Visual Studio Code, you can develop code inside a remote container just as easily as on your local machine, and also transfer files back and forth. Follow the instructions in [this guide](VSCODE.md) to get started using Visual Studio Code for remote container development.
+With [Visual Studio Code](https://code.visualstudio.com/), you can develop code inside a remote container just as easily as on your local machine, and also transfer files back and forth. Follow the instructions in [this guide](VSCODE.md) to get started using Visual Studio Code for remote container development.
 
 ---
 

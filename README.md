@@ -48,8 +48,6 @@ ssh username@IP-address-of-workstation
 ```
 This should log you into the server without prompting for a password.
 
-
-
 ---
 
 ## Transfer Data between Local machine and Workstations
@@ -150,6 +148,81 @@ Upload any data to the '/home/$USER/data' directory, and you should be able to s
 # You should execute the following command within the container.
 ls /data
 ```
+
+---
+
+## Docker commands 
+Please visit [the official docs](https://docs.docker.com/engine/reference/run/) to see all the docker commands and their options. 
+
+### List containers
+To list the running containers, simply execute the docker ps command, 
+```bash
+# You should execute the following command on the workstation.
+docker ps
+```
+To include all the containers present on your Docker host, append the -a option, 
+```bash
+# You should execute the following command on the workstation.
+docker ps -a
+```
+
+### Start/Stop/Kill containers
+
+To stop one or more running Docker containers, you can use the docker stop command
+```bash
+# You should execute the following command on the workstation.
+docker stop container-name
+```
+
+To start containers, 
+```bash
+# You should execute the following command on the workstation.
+docker start container-name
+```
+
+And you can kill containers. 
+```bash
+# You should execute the following command on the workstation.
+docker kill container-name
+```
+
+### Run containers
+
+Use run command to have a container. 
+
+```bash
+# You should execute the following command on the workstation.
+docker run hello-world
+```
+
+Add **--runtime==nvidia -v /dev/shm:/dev/shm** option to have gpu resource in the container.
+
+```bash
+# You should execute the following command on the workstation.
+docker run --runtime=nvidia -v /dev/shm:/dev/shm nvidia/cuda:11.6.2-devel-ubuntu20.04 nvidia-smi
+```
+
+You can exit the session of the container. 
+
+```bash
+# You should execute the following command within the container.
+exit
+```
+
+If you want to re-connect to the container, start the container(if it's not running) and execute an interactive shell.
+
+```bash
+# You should execute the following command on the workstation.
+docker exec -it container-name /bin/bash
+```
+
+Visit [the docker image recommendation page](RECOMMENDATIONS.md) to find images used in the lab. 
+
+---
+## Setup a remote development environment
+
+### Visual Studio Code
+With Visual Studio Code, you can develop code inside a remote container just as easily as on your local machine, and also transfer files back and forth. Follow the instructions in [this guide](VSCODE.md) to get started using Visual Studio Code for remote container development.
 
 ---
 
@@ -271,75 +344,6 @@ For the cuda supports, check [nvidia/cuda](https://hub.docker.com/r/nvidia/cuda)
 
 ---
 
-## Frequently used Docker commands 
-
-### List containers
-To list the running containers, simply execute the docker ps command, 
-```bash
-# You should execute the following command on the workstation.
-docker ps
-```
-To include all the containers present on your Docker host, append the -a option, 
-```bash
-# You should execute the following command on the workstation.
-docker ps -a
-```
-
-### Start/Stop/Kill containers
-
-To stop one or more running Docker containers, you can use the docker stop command
-```bash
-# You should execute the following command on the workstation.
-docker stop container-name
-```
-
-To start containers, 
-```bash
-# You should execute the following command on the workstation.
-docker start container-name
-```
-
-And you can kill containers. 
-```bash
-# You should execute the following command on the workstation.
-docker kill container-name
-```
-
-### Run containers
-
-Use run command to have a container. 
-
-```bash
-# You should execute the following command on the workstation.
-docker run hello-world
-```
-
-Add **--runtime==nvidia -v /dev/shm:/dev/shm** option to have gpu resource in the container.
-
-```bash
-# You should execute the following command on the workstation.
-docker run --runtime=nvidia -v /dev/shm:/dev/shm nvidia/cuda:11.6.2-devel-ubuntu20.04 nvidia-smi
-```
-
-You can exit the session of the container. 
-
-```bash
-# You should execute the following command within the container.
-exit
-```
-
-If you want to re-connect to the container, start the container(if it's not running) and execute an interactive shell.
-
-```bash
-# You should execute the following command on the workstation.
-docker exec -it container-name /bin/bash
-```
-
-Please visit [the official docs](https://docs.docker.com/engine/reference/run/) to see all the docker commands and their options. 
-
-Visit [the docker image recommendation page](RECOMMENDATIONS.md) to find images used in the lab. 
-
----
 
 ## How to create a persistent volume
 [Youtube tutorial](https://www.youtube.com/watch?v=OrQLrqQm4M0)

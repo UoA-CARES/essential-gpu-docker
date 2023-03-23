@@ -32,7 +32,7 @@
 
 10. Once the connection is established, you can use VS Code as normal, with the added functionality of being able to work remotely on other machines or environments.
 
-### Connect to a remote SSH Server using VS Code
+## Connect to a remote SSH Server using VS Code
 
 1. Open VS Code on your local machine.
 
@@ -50,7 +50,7 @@
 
 8. Once the connection is established, VS Code will create a new window that is connected to the remote server. You can now use VS Code to edit files, run commands, and perform other tasks on the remote server, just as if you were working locally.
 
-### Connect to a docker container in a remote SSH Server
+## Connect to a docker container in a remote SSH Server
 
 1. Open VS Code on your local machine.
 

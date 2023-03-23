@@ -91,7 +91,7 @@ That's it! You can use similar commands to transfer files from the remote machin
 
 To incorporate GPU resources within the container, include the following options: 
 ```
---runtime==nvidia -v /dev/shm:/dev/shm.
+--runtime==nvidia -v /dev/shm:/dev/shm
 ```
 
 For instance, you can start a container by following the command below.

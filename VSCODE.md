@@ -1,4 +1,4 @@
-# **[Setting up SSH key authentication](https://github.com/UoA-CARES/essential-gpu-docker#connect-ssh-without-password) prior to following the instructions below.**
+# **[Setup SSH key authentication](https://github.com/UoA-CARES/essential-gpu-docker#connect-ssh-without-password) prior to following the instructions below.**
 
 ## Install VS Code
 

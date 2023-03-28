@@ -128,6 +128,41 @@ The expected output/messages should be as follows.
 +-------------------------------+----------------------+----------------------+
 ```
 
+You have the flexibility to utilize any Docker images that support GPU, and there are several examples available on how to run these Docker images.
+
+PyTorch
+```bash
+docker run --rm -it --privileged --runtime=nvidia \
+-v /dev/shm:/dev/shm \
+-e NVIDIA_VISIBLE_DEVICES=all \
+-e NVIDIA_DRIVER_COMPABILITIES=all pytorch/pytorch /bin/bash
+```
+
+Tensorflow
+```bash
+docker run --rm -it --privileged --runtime=nvidia \
+-v /dev/shm:/dev/shm \
+-e NVIDIA_VISIBLE_DEVICES=all \
+-e NVIDIA_DRIVER_COMPABILITIES=all tensorflow/tensorflow /bin/bash
+```
+
+Tensorflow-Jupyter
+```bash
+docker run --rm -it --privileged --runtime=nvidia \
+--network host \
+-v /dev/shm:/dev/shm \
+-e NVIDIA_VISIBLE_DEVICES=all \
+-e NVIDIA_DRIVER_COMPABILITIES=all tensorflow/tensorflow:latest-gpu-jupyter
+```
+
+Miniconda
+```bash
+docker run --rm -it --privileged --runtime=nvidia \
+-v /dev/shm:/dev/shm \
+-e NVIDIA_VISIBLE_DEVICES=all \
+-e NVIDIA_DRIVER_COMPABILITIES=all continuumio/miniconda3 /bin/bash
+```
+
 
 
 ---

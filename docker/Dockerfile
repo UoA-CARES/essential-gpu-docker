@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install -y \
     lsb-release \
     mesa-utils \
     git \
-    subversion \
     nano \
     xterm \
     wget \
@@ -25,15 +24,15 @@ RUN apt-get update && apt-get install -y \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install cmake 3.22.1
-RUN git clone https://gitlab.kitware.com/cmake/cmake.git && \
-    cd cmake && git checkout tags/v3.22.1 && ./bootstrap --parallel=8 && make -j8 && make install && \
-    cd .. && rm -rf cmake
+# RUN git clone https://gitlab.kitware.com/cmake/cmake.git && \
+#     cd cmake && git checkout tags/v3.22.1 && ./bootstrap --parallel=8 && make -j8 && make install && \
+#     cd .. && rm -rf cmake
 
 # Install tmux 3.2
-RUN apt-get update && apt-get install -y automake autoconf pkg-config libevent-dev libncurses5-dev bison && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN git clone https://github.com/tmux/tmux.git && \
-    cd tmux && git checkout tags/3.2 && ls -la && sh autogen.sh && ./configure && make -j8 && make install
+# RUN apt-get update && apt-get install -y automake autoconf pkg-config libevent-dev libncurses5-dev bison && \
+#     apt-get clean && rm -rf /var/lib/apt/lists/*
+# RUN git clone https://github.com/tmux/tmux.git && \
+#     cd tmux && git checkout tags/3.2 && ls -la && sh autogen.sh && ./configure && make -j8 && make install
 
 # Install new paramiko (solves ssh issues)
 RUN apt-add-repository universe
@@ -72,10 +71,12 @@ RUN apt-get update && apt-get install -y --allow-downgrades --allow-remove-essen
 RUN rosdep init && rosdep update
 RUN echo "source /opt/ros/noetic/setup.bash" >> /root/.bashrc
 RUN echo "export ROSLAUNCH_SSH_UNKNOWN=1" >> /root/.bashrc
-RUN echo "source /opt/ros/noetic/setup.zsh" >> /root/.zshrc
-RUN echo "export ROSLAUNCH_SSH_UNKNOWN=1" >> /root/.zshrc
+# RUN echo "source /opt/ros/noetic/setup.zsh" >> /root/.zshrc
+# RUN echo "export ROSLAUNCH_SSH_UNKNOWN=1" >> /root/.zshrc
 
 # Entry script
-COPY assets/entrypoint_setup.sh /
+# COPY assets/entrypoint_setup.sh /
+COPY entrypoint_setup.sh /
+# RUN chmod +x entrypoint.sh
 ENTRYPOINT ["/entrypoint_setup.sh"]
 

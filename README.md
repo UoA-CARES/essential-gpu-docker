@@ -91,13 +91,18 @@ That's it! You can use similar commands to transfer files from the remote machin
 
 To incorporate GPU resources within the container, include the following options: 
 ```
---runtime==nvidia -v /dev/shm:/dev/shm
+--privileged --runtime==nvidia -v /dev/shm:/dev/shm -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_COMPABILITIES=all
 ```
 
 For instance, you can start a container by following the command below.
 ```bash
 # You should execute the following command on the workstation.
-docker run --rm -it --runtime=nvidia -v /dev/shm:/dev/shm nvidia/cuda:11.6.2-devel-ubuntu20.04 /bin/bash
+docker run --rm -it --privileged --runtime=nvidia \
+-v /dev/shm:/dev/shm \
+-e NVIDIA_VISIBLE_DEVICES=all \
+-e NVIDIA_DRIVER_COMPABILITIES=all \
+nvidia/cuda:11.6.2-devel-ubuntu20.04 \
+/bin/bash
 ```
 
 To confirm whether your container has access to the GPU resources on the host machine, you can execute the command below:

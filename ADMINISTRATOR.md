@@ -20,6 +20,12 @@ Now, you can connect the system using ssh.
 ssh username@ipaddress
 ```
 
+# Install other packages
+```
+sudo apt update
+sudo apt install build-essential 
+```
+
 # Install Nvidia Docker
 - Install Docker CE (https://docs.docker.com/engine/install/ubuntu/)
 - Install Nvidia Docker (https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)

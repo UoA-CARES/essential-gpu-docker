@@ -195,7 +195,7 @@ Use run command to have a container.
 docker run hello-world
 ```
 
-Add **--privileged --runtime==nvidia -v /dev/shm:/dev/shm -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_COMPABILITIES=all** option to have gpu resource in the container. For more options, please refer to [here](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html).
+Add **--privileged --runtime==nvidia -v /dev/shm:/dev/shm -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_COMPABILITIES=all** options to have gpu resource in the container. For more options, please refer to [here](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html).
 
 ```bash
 # You should execute the following command on the workstation.

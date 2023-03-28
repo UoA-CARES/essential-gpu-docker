@@ -195,11 +195,16 @@ Use run command to have a container.
 docker run hello-world
 ```
 
-Add **--runtime==nvidia -v /dev/shm:/dev/shm** option to have gpu resource in the container.
+Add **--privileged --runtime==nvidia -v /dev/shm:/dev/shm -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_COMPABILITIES=all** option to have gpu resource in the container.
 
 ```bash
 # You should execute the following command on the workstation.
-docker run --runtime=nvidia -v /dev/shm:/dev/shm nvidia/cuda:11.6.2-devel-ubuntu20.04 nvidia-smi
+docker run --privileged --runtime==nvidia \
+-v /dev/shm:/dev/shm \
+-e NVIDIA_VISIBLE_DEVICES=all \
+-e NVIDIA_DRIVER_COMPABILITIES=all \
+nvidia/cuda:11.6.2-devel-ubuntu20.04 \
+nvidia-smi
 ```
 
 You can exit the session of the container. 

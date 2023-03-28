@@ -27,26 +27,26 @@ ssh username@IP-address-of-workstation
 ### Connect ssh without password
 To connect to SSH without a password, you will need to set up SSH key authentication between the client machine (where you are connecting from) and the server machine (where you are connecting to). Here are the general steps to follow:
 
-1. Generate an SSH key pair on the client machine. This can be done using the following command:
+1. Generate an SSH key pair on the client machine. This can be done using the following command: (This will generate a public key file (usually named id_rsa.pub) and a private key file (usually named id_rsa) in the ~/.ssh/ directory.)
+
 ```bash
 # You should execute the following command on your local machine.
 ssh-keygen
 ```
-This will generate a public key file (usually named id_rsa.pub) and a private key file (usually named id_rsa) in the ~/.ssh/ directory.
 
-2. Copy the public key to the server machine. You can do this using the ssh-copy-id command, which will copy the public key to the server's authorized keys file:
+
+2. Copy the public key to the server machine. You can do this using the ssh-copy-id command, which will copy the public key to the server's authorized keys file: (This will prompt you for the server password, and then add your public key to the server's ~/.ssh/authorized_keys file.)
 ```bash
 # You should execute the following command on your local machine.
 ssh-copy-id username@IP-address-of-workstation
 ```
 
-This will prompt you for the server password, and then add your public key to the server's ~/.ssh/authorized_keys file.
-3. Test the connection. You should now be able to connect to the server without a password by running:
+3. Test the connection. You should now be able to connect to the server without a password by running: (This should log you into the server without prompting for a password.)
 ```bash
 # You should execute the following command on your local machine.
 ssh username@IP-address-of-workstation
 ```
-This should log you into the server without prompting for a password.
+
 
 ---
 
@@ -84,9 +84,6 @@ Replace /path/to/local/file with the path to the local file you want to transfer
 - Enter your password when prompted, and the file will be transferred.
 
 That's it! You can use similar commands to transfer files from the remote machine to your local machine or to transfer directories and their contents.
-
---- 
-
 
 ---
 

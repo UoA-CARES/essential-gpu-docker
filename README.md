@@ -27,26 +27,26 @@ ssh username@IP-address-of-workstation
 ### Connect ssh without password
 To connect to SSH without a password, you will need to set up SSH key authentication between the client machine (where you are connecting from) and the server machine (where you are connecting to). Here are the general steps to follow:
 
-1. Generate an SSH key pair on the client machine. This can be done using the following command:
+1. Generate an SSH key pair on the client machine. This can be done using the following command: (This will generate a public key file (usually named id_rsa.pub) and a private key file (usually named id_rsa) in the ~/.ssh/ directory.)
+
 ```bash
 # You should execute the following command on your local machine.
 ssh-keygen
 ```
-This will generate a public key file (usually named id_rsa.pub) and a private key file (usually named id_rsa) in the ~/.ssh/ directory.
 
-2. Copy the public key to the server machine. You can do this using the ssh-copy-id command, which will copy the public key to the server's authorized keys file:
+
+2. Copy the public key to the server machine. You can do this using the ssh-copy-id command, which will copy the public key to the server's authorized keys file: (This will prompt you for the server password, and then add your public key to the server's ~/.ssh/authorized_keys file.)
 ```bash
 # You should execute the following command on your local machine.
 ssh-copy-id username@IP-address-of-workstation
 ```
 
-This will prompt you for the server password, and then add your public key to the server's ~/.ssh/authorized_keys file.
-3. Test the connection. You should now be able to connect to the server without a password by running:
+3. Test the connection. You should now be able to connect to the server without a password by running: (This should log you into the server without prompting for a password.)
 ```bash
 # You should execute the following command on your local machine.
 ssh username@IP-address-of-workstation
 ```
-This should log you into the server without prompting for a password.
+
 
 ---
 
@@ -85,46 +85,6 @@ Replace /path/to/local/file with the path to the local file you want to transfer
 
 That's it! You can use similar commands to transfer files from the remote machine to your local machine or to transfer directories and their contents.
 
---- 
-
-## Enable GPU resource utilization for your container
-
-To incorporate GPU resources within the container, include the following options: 
-```
---runtime==nvidia -v /dev/shm:/dev/shm
-```
-
-For instance, you can start a container by following the command below.
-```bash
-# You should execute the following command on the workstation.
-docker run --rm -it --runtime=nvidia -v /dev/shm:/dev/shm nvidia/cuda:11.6.2-devel-ubuntu20.04 /bin/bash
-```
-
-To confirm whether your container has access to the GPU resources on the host machine, you can execute the command below:
-
-```bash
-# You should execute the following command within the container.
-nvidia-smi
-```
-
-The expected output/messages should be as follows.
-
-```
-+-----------------------------------------------------------------------------+
-| NVIDIA-SMI 510.108.03   Driver Version: 510.108.03   CUDA Version: 11.6     |
-|-------------------------------+----------------------+----------------------+
-| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|                               |                      |               MIG M. |
-|===============================+======================+======================|
-|   0  Quadro P6000        Off  | 00000000:03:00.0 Off |                  Off |
-| 26%   28C    P8     9W / 250W |    200MiB / 24576MiB |      0%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-```
-
-
-
 ---
 
 ## How to share data between the workstation and containers
@@ -153,6 +113,84 @@ ls /data
 
 ## Docker commands 
 Please visit [the official docs](https://docs.docker.com/engine/reference/run/) to see all the docker commands and their options. 
+
+### Run containers with GPU resource utilization
+
+To incorporate GPU resources within the container, include the following options. For more options, please refer to [here](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html).
+
+```
+--privileged --runtime==nvidia -v /dev/shm:/dev/shm -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_COMPABILITIES=all
+```
+
+For instance, you can start a container by following the command below.
+```bash
+# You should execute the following command on the workstation.
+docker run --rm -it --privileged --runtime=nvidia \
+-v /dev/shm:/dev/shm \
+-e NVIDIA_VISIBLE_DEVICES=all \
+-e NVIDIA_DRIVER_COMPABILITIES=all \
+nvidia/cuda:11.6.2-devel-ubuntu20.04 \
+/bin/bash
+```
+
+To confirm whether your container has access to the GPU resources on the host machine, you can execute the command below:
+
+```bash
+# You should execute the following command within the container.
+nvidia-smi
+```
+
+The expected output/messages should be as follows.
+
+```
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 510.108.03   Driver Version: 510.108.03   CUDA Version: 11.6     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Quadro P6000        Off  | 00000000:03:00.0 Off |                  Off |
+| 26%   28C    P8     9W / 250W |    200MiB / 24576MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+```
+
+You have the flexibility to utilize any Docker images that support GPU, and there are several examples available on how to run these Docker images.
+
+PyTorch
+```bash
+docker run --rm -it --privileged --runtime=nvidia \
+-v /dev/shm:/dev/shm \
+-e NVIDIA_VISIBLE_DEVICES=all \
+-e NVIDIA_DRIVER_COMPABILITIES=all pytorch/pytorch /bin/bash
+```
+
+Tensorflow
+```bash
+docker run --rm -it --privileged --runtime=nvidia \
+-v /dev/shm:/dev/shm \
+-e NVIDIA_VISIBLE_DEVICES=all \
+-e NVIDIA_DRIVER_COMPABILITIES=all tensorflow/tensorflow /bin/bash
+```
+
+Tensorflow-Jupyter
+```bash
+docker run --rm -it --privileged --runtime=nvidia \
+--network host \
+-v /dev/shm:/dev/shm \
+-e NVIDIA_VISIBLE_DEVICES=all \
+-e NVIDIA_DRIVER_COMPABILITIES=all tensorflow/tensorflow:latest-gpu-jupyter
+```
+
+Miniconda
+```bash
+docker run --rm -it --privileged --runtime=nvidia \
+-v /dev/shm:/dev/shm \
+-e NVIDIA_VISIBLE_DEVICES=all \
+-e NVIDIA_DRIVER_COMPABILITIES=all continuumio/miniconda3 /bin/bash
+```
+
 
 ### List containers
 To list the running containers, simply execute the docker ps command, 
@@ -186,34 +224,7 @@ And you can kill containers.
 docker kill container-name
 ```
 
-### Run containers
-
-Use run command to have a container. 
-
-```bash
-# You should execute the following command on the workstation.
-docker run hello-world
-```
-
-Add **--privileged --runtime==nvidia -v /dev/shm:/dev/shm -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_COMPABILITIES=all** option to have gpu resource in the container.
-
-```bash
-# You should execute the following command on the workstation.
-docker run --privileged --runtime==nvidia \
--v /dev/shm:/dev/shm \
--e NVIDIA_VISIBLE_DEVICES=all \
--e NVIDIA_DRIVER_COMPABILITIES=all \
-nvidia/cuda:11.6.2-devel-ubuntu20.04 \
-nvidia-smi
-```
-
-You can exit the session of the container. 
-
-```bash
-# You should execute the following command within the container.
-exit
-```
-
+### Reconnect container's shell
 If you want to re-connect to the container, start the container(if it's not running) and execute an interactive shell.
 
 ```bash
@@ -221,136 +232,7 @@ If you want to re-connect to the container, start the container(if it's not runn
 docker exec -it container-name /bin/bash
 ```
 
-Visit [the docker image recommendation page](RECOMMENDATIONS.md) to find images used in the lab. 
-
----
-## **(Strongly Recommend) Setup a remote development environment**
-
-### **Visual Studio Code**
-With [Visual Studio Code](https://code.visualstudio.com/), you can develop code inside a remote container just as easily as on your local machine, and also transfer files back and forth. Follow the instructions in [this guide](VSCODE.md) to get started using Visual Studio Code for remote container development.
-
----
-
-## CARES Dockers
-
-https://hub.docker.com/repositories/mycares
-
-Docker images supporting the Nvidia CUDA toolkit have been created for internal purposes.
-
-
-### Pytorch 1.13 (Cuda 11.6)
-
-The image was built based on the [Nvidia image]((https://hub.docker.com/r/nvidia/cuda/tags?page=1&name=11.6.2-devel-ubuntu20.04)) and installed PyTorch 1.13 + CUDA 11.6 in a Conda environment. To use it, you will need to first pull it from Docker Hub.
-
-```bash
-# You should execute the following command on the workstation.
-docker pull mycares/pytorch:1.13.0-cuda11.6-ubuntu20.04
-```
-
-Next, start a container by running the following command.
-
-```bash
-# You should execute the following command on the workstation.
-docker run -it --runtime=nvidia -v /dev/shm:/dev/shm --mount source=datastore,target=/data mycares/detectron2:2023.03.21 /bin/bash
-```
-
-After connecting to the container, activate the Conda environment for PyTorch.
-
-```bash
-# You should execute the following command within the container.
-conda activate torch1.13.0
-```
-
-It is recommended to use pip to install Python packages. For example:
-```bash
-# You should execute the following command within the container.
-pip install tqdm
-```
-
-
-### Detectron2 (Cuda 11.6)
-The image was built based on the [Nvidia image]((https://hub.docker.com/r/nvidia/cuda/tags?page=1&name=11.6.2-devel-ubuntu20.04)) and installed PyTorch 1.13 + CUDA 11.6 + Detectron2(2023.03.21) in a Conda environment. To use it, you will need to first pull it from Docker Hub.
-
-```bash
-# You should execute the following command on the workstation.
-docker pull mycares/detectron2:2023.03.21
-```
-
-Next, start a container by running the following command.
-
-```bash
-# You should execute the following command on the workstation.
-docker run -it --runtime=nvidia -v /dev/shm:/dev/shm --mount source=datastore,target=/data mycares/detectron2:2023.03.21 /bin/bash
-```
-
-Once connected to the container, activate the conda environment for detectron2. 
-
-```bash
-# You should execute the following command within the container.
-conda activate torch1.13.0
-```
-
-You can try a quick demo of Detectron2 by copying any image file (and naming it 'input.jpg') into the '/home/$USER/data' directory of the workstation using FileZilla Client, and then listing the file in your container. In this example, we will use the following image.
-
-![input image](screenshot/input.jpg)
-
-List the file in your container. 
-```bash
-# You should execute the following command within the container.
-ls /data
-```
-
-In order to perform a quick demo, navigate to the '~/workspace/detectron2/demo' directory after verifying that the input.jpg file has been successfully transferred to your container.
-
-```bash
-# You should execute the following command within the container.
-cd ~/workspace/detectron2/demo
-```
-
-Create a folder named 'output' to save the output files from the demo.
-
-```bash
-# You should execute the following command within the container.
-mkdir ~/workspace/detectron2/demo/output 
-```
-
-Now, we are ready to run the demo script. 
-
-```bash
-# You should execute the following command within the container.
-python demo.py --config-file ../configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml \
-  --input /data/input.jpg \
-  --output output \
-  --opts MODEL.WEIGHTS detectron2://COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x/137849600/model_final_f10217.pkl
-```
-
-Copy the output folder into /data in your container to see the result.
-
-```bash
-# You should execute the following command within the container.
-cp -r output/ /data/
-```
-
-Once you have refreshed FileZilla Client, go to the shared directory (/home/$USER/data) on the workstation. Inside, you'll find a directory named 'output' that contains the resulting file.
-
-![output image](screenshot/output.jpg)
-
-Please utilize pip within this conda environment if you require additional Python packages.
-```bash
-# You should execute the following command within the container.
-pip install tqdm
-```
-
-### Need your own container?
-**WIP**
-Search and use docker images you want [here](https://hub.docker.com/). 
-
-For the cuda supports, check [nvidia/cuda](https://hub.docker.com/r/nvidia/cuda) dockerhub for more tags. 
-
----
-
-
-## How to create a persistent volume
+### Create a persistent volume
 [Youtube tutorial](https://www.youtube.com/watch?v=OrQLrqQm4M0)
 
 By creating a Docker volume for persistent data, it is possible to share data between the workstation and containers.
@@ -374,6 +256,21 @@ The volume(mydatastore) is mounded on /mydata in the container.
 ls /mydata
 ```
 
+---
+## Setup a remote development environment (Strongly Recommend)
+
+### Visual Studio Code
+With [Visual Studio Code](https://code.visualstudio.com/), you can develop code inside a remote container just as easily as on your local machine, and also transfer files back and forth. Follow the instructions in [this guide](VSCODE.md) to get started using Visual Studio Code for remote container development.
+
+---
+
+## CARES Dockers
+
+Please refer to [here](CARES.md)
+
+---
+
+
 # FAQ
 ### 'nvidia-smi' gives 'Failed to initialize NVML: Unknown Error'
 
@@ -389,7 +286,6 @@ And try 'nvidia-smi' within your container.
 # You should execute the following command within the container.
 nvidia-smi
 ```
-
 
 ---
 

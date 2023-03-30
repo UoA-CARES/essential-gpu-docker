@@ -2,19 +2,23 @@
 
 [Docker images](https://hub.docker.com/repositories/mycares) supporting the Nvidia CUDA toolkit have been created for internal purposes.
 
-## ROS Noetic GPU
+## ROS Noetic + GPU
 Read the instruction [here](ros-noetic-gpu/readme.md).
 
-## ROS Noetic Detectron2
+## ROS Noetic + Detectron2
 Read the instruction [here](ros-noetic-gpu/detectron2/readme.md).
-
-## ROS2 Humble Gazebosim
-WIP
 
 ## Kaggle Docker Python
 Read the instruction [here](kaggle_gpu_python/readme.md).
 
-## Pytorch 1.13 (Cuda 11.6)
+## ROS2 Humble + Gazebosim
+WIP
+
+## Ubuntu20.04 + Cuda11.6
+WIP 
+
+
+## (Deprecated) Pytorch 1.13 (Cuda 11.6)
 
 The image was built based on the [Nvidia image]((https://hub.docker.com/r/nvidia/cuda/tags?page=1&name=11.6.2-devel-ubuntu20.04)) and installed PyTorch 1.13 + CUDA 11.6 in a Conda environment. To use it, you will need to first pull it from Docker Hub.
 
@@ -42,7 +46,7 @@ It is recommended to use pip to install Python packages.
 ---
 
 
-## Detectron2 (Cuda 11.6)
+## (Deprecated) Detectron2 (Cuda 11.6)
 The image was built based on the [Nvidia image]((https://hub.docker.com/r/nvidia/cuda/tags?page=1&name=11.6.2-devel-ubuntu20.04)) and installed PyTorch 1.13 + CUDA 11.6 + Detectron2(2023.03.21) in a Conda environment. To use it, you will need to first pull it from Docker Hub.
 
 ```bash
@@ -66,7 +70,7 @@ conda activate torch1.13.0
 
 You can try a quick demo of Detectron2 by copying any image file (and naming it 'input.jpg') into the '/home/$USER/data' directory of the workstation using FileZilla Client, and then listing the file in your container. In this example, we will use the following image.
 
-![input image](screenshot/input.jpg)
+![input image](../screenshot/input.jpg)
 
 List the file in your container. 
 ```bash
@@ -107,7 +111,7 @@ cp -r output/ /data/
 
 Once you have refreshed FileZilla Client, go to the shared directory (/home/$USER/data) on the workstation. Inside, you'll find a directory named 'output' that contains the resulting file.
 
-![output image](screenshot/output.jpg)
+![output image](../screenshot/output.jpg)
 
 Please utilize pip within this conda environment if you require additional Python packages.
 

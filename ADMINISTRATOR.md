@@ -4,10 +4,10 @@
 
 
 # Add a user
-You can add a user(myuser1/pass1) as follows. You can change id(myuser1) and password(pass1) as you want. 
+You can add a user(USERNAME/USERPASSWD) as follows. You can change id and password as you want. 
 ```
-sudo adduser myuser1 --gecos "myuser1,RoomNumber,WorkPhone,HomePhone" --disabled-password
-echo "myuser1:pass1" | sudo chpasswd
+sudo adduser USERNAME --gecos "USERNAME,RoomNumber,WorkPhone,HomePhone" --disabled-password
+echo "USERNAME:USERPASSWD" | sudo chpasswd
 ```
 
 # Install openssh-server
@@ -17,7 +17,7 @@ sudo apt install openssh-server
 ```
 Now, you can connect the system using ssh. 
 ```
-ssh username@ipaddress
+ssh USERPASSWD@ipaddress
 ```
 
 # Install other packages
@@ -35,7 +35,7 @@ sudo apt install docker-compose
 ```
 - Add the user into the docker group
 ```
-sudo usermod -aG docker myuser1
+sudo usermod -aG docker $USER
 ```
 
 Now, you can try the following command. 
@@ -94,24 +94,24 @@ Container console:
 # Default Docker volume for the persistant data 
 [Youtube tutorial](https://www.youtube.com/watch?v=OrQLrqQm4M0)
 
-First,we need to connect to the machine with myuser1 account.
+First,we need to connect to the machine with USERNAME account.
 ```
-ssh myuser1@localhost
+ssh USERNAME@localhost
 ```
 
-We create a volume mapped to /home/myuser1/data path. This volume will be mounted in a container. So you can share data between containers. 
+We create a volume mapped to /home/$USER/data path. This volume will be mounted in a container. So you can share data between containers. 
 ```
-mkdir /home/myuser1/data
-docker volume create --name datastore --opt type=none --opt device=/home/myuser1/data --opt o=bind
+mkdir /home/$USER/data
+docker volume create --name datastore --opt type=none --opt device=/home/$USER/data --opt o=bind
 ```
 
 # (Optional) Install FileBrowser for a user
 Install [FileBrowser](https://filebrowser.org/installation) to transfer files if you want to use web-based file browser instead termimal. 
 
 
-First,we need to connect to the machine with myuser1 account.
+First,we need to connect to the machine with USERNAME account.
 ```
-ssh myuser1@localhost
+ssh USERNAME@localhost
 ```
 
 Create folder and files to use FileBrowser as a docker container. 
@@ -132,7 +132,7 @@ We need to edit docker-compose.yml.
 nano docker-compose.yml 
 ```
 
-Use your uid:gid instead '1001:1001'. And use your userid instead 'myuser1'. 
+Use your uid:gid instead '1001:1001'. 
 ```
 version: '3'
 services:
@@ -143,8 +143,8 @@ services:
     ports:
       - 8082:80
     volumes:
-      - /home/myuser1/:/srv
-      - /home/myuser1/filebrowser/filebrowser.db:/database.db
+      - /home/$USER/:/srv
+      - /home/$USER/filebrowser/filebrowser.db:/database.db
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true

@@ -32,6 +32,7 @@ docker run --rm -it \
 
 If you do add or modify files in the container, you won't be able to view them on your local machine due to permission issues. To view those files, you'll need to adjust their permissions.
 ```bash
+# You should execute the following command on the workstation (not within the container).
 sudo chown -R $(id -un):$(id -gn) PATH_TO_YOUR_DIRECTORY
 ```
 

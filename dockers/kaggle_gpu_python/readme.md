@@ -9,7 +9,7 @@ make kaggle-gpu-python
 ```
 
 ### Run
-To access all the code in your local workspace, use the '-v $HOME/workspace:/workspace' option to mount your workspace to the container. The container's default user is 'root', so avoid modifying any files in the container and use it only for training purposes. If you do add or modify files in the container, you won't be able to view them on your local machine due to permission issues. (To view those files, you'll need to adjust their permissions.)
+To access all the code in your local workspace, use the '-v $HOME/workspace:/workspace' option to mount your workspace to the container(replace '$HOME/workspace' with your workspace path). The container's default user is 'root', so avoid modifying any files in the container and use it only for training purposes. If you do add or modify files in the container, you won't be able to view them on your local machine due to permission issues. (To view those files, you'll need to adjust their permissions.)
 
 ```
 docker run -it \

@@ -38,7 +38,7 @@ sudo apt install docker-compose
 sudo usermod -aG docker $USER
 ```
 
-Now, you can try the following command. 
+Now, you can try the following command. (if you have a permission issue, reboot your system and try it again)
 ```
 docker run --rm --runtime=nvidia --gpus all nvidia/cuda:11.6.2-base-ubuntu20.04 nvidia-smi
 ```

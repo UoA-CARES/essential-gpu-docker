@@ -13,7 +13,14 @@ The robotics lab houses these workstations. If you have access to the lab, you c
 | P6000-3 (UOA370133) | 130.216.238.16  | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
 | P6000-4 (UOA370142) | 130.216.238.182 | Ubuntu 22.04 | 510.108.03  | 11.6 | Quadro P6000 | 24576MiB |
 
+---
+
+## CARES Dockers
+
+Please refer to [here](dockers/readme.md)
+
 --- 
+
 
 ## Connect to the Workstation Remotely using SSH
 To connect to the workstations remotely, you will need to use an SSH client, such as Terminal on Linux/MacOS or Command Prompt on Windows, on your local machine. Your local machine must be connected to the UoA network via Wi-Fi or Ethernet cable. If you are off-campus, you will need to connect to the UoA's VPN. If your Windows OS does not have OpenSSH installed, you can find instructions on how to add it [here](https://ittutorials.net/microsoft/windows-10/enable-ssh-windows-10-command-prompt/). Alternatively, you can use other ssh clients, such as [PuttySSH](https://www.putty.org/).
@@ -261,12 +268,6 @@ ls /mydata
 
 ### Visual Studio Code
 With [Visual Studio Code](https://code.visualstudio.com/), you can develop code inside a remote container just as easily as on your local machine, and also transfer files back and forth. Follow the instructions in [this guide](VSCODE.md) to get started using Visual Studio Code for remote container development.
-
----
-
-## CARES Dockers
-
-Please refer to [here](dockers/readme.md)
 
 ---
 

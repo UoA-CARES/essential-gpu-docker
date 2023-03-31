@@ -59,7 +59,7 @@ The following is an example of how the added line appears in the JSON file. Do n
          "path": "/usr/bin/nvidia-container-runtime",
          "runtimeArgs": []
      }
- },
+ }
 }
 ```
 Reboot the system and try the following command. 

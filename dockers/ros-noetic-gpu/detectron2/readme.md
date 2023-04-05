@@ -1,11 +1,12 @@
 ### Prerequisites
 [Install Nvidia Docker](https://github.com/UoA-CARES/essential-gpu-docker/blob/main/ADMINISTRATOR.md#install-nvidia-docker)
-
-### Build
-To build Detectron2 on ROS Noetic docker image, 
 ```
 sudo apt update && sudo apt install -y build-essential
-cd PATH_TO_ESSENTIAL_GPU_DOCKER/dockers
+```
+
+### Build 
+```
+cd PATH_TO_ESSENTIAL_GPU_DOCKER
 make ros_noetic_detectron2
 ```
 

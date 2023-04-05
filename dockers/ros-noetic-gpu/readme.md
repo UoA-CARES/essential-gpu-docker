@@ -1,15 +1,14 @@
 ### Prerequisites
 [Install Nvidia Docker](https://github.com/UoA-CARES/essential-gpu-docker/blob/main/ADMINISTRATOR.md#install-nvidia-docker)
-
-### Build 
-
-To build ROS Noetic docker image, 
 ```
 sudo apt update && sudo apt install -y build-essential
-cd PATH_TO_ESSENTIAL_GPU_DOCKER/dockers
-make ros_noetic_gpu
 ```
 
+### Build 
+```
+cd PATH_TO_ESSENTIAL_GPU_DOCKER
+make ros_noetic_gpu
+```
 
 ### Run
 To access all the code in your local workspace, use the '-v $HOME/workspace:/workspace' option to mount your workspace to the container. The container's default user is 'root', so avoid modifying any files in the container and use it only for training purposes. 

@@ -1,0 +1,28 @@
+{
+    "image": "mycares/kaggle-gpu-python:latest",
+
+    "containerEnv": {
+        "NVIDIA_VISIBLE_DEVICES": "all",
+        "NVIDIA_DRIVER_COMPABILITIES": "all",
+        "QT_X11_NO_MITSHM": "1",
+        "DISPLAY": "${localEnv:DISPLAY}"
+    },
+
+    "runArgs": [        
+        "--privileged",
+        "--gpus=all", 
+        "--runtime=nvidia", 
+        "--volume=/dev/shm:/dev/shm",
+        "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
+        "--volume=${localEnv:HOME}/workspace:/workspace"
+    ],
+ 
+    "customizations": {
+      "vscode": {
+            "extensions": [
+                "streetsidesoftware.code-spell-checker", 
+                "ms-python.python"
+            ]
+        }
+    }
+}

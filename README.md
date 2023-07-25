@@ -290,5 +290,17 @@ And try 'nvidia-smi' within your container.
 nvidia-smi
 ```
 
+### Connection to the workstation could not be established.
+
+Verify whether the IP address has been altered. If it has, kindly modify the readme file accordingly and create a pull request (PR).
+
+If the network manager is not accessible on the workstation, please get in touch with your supervisor to execute the following command with sudo permission:
+
+```
+sudo systemctl restart NetworkManager.service
+```
+
 ---
+
+
 

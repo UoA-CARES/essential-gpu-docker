@@ -9,7 +9,6 @@ kaggle-gpu-python: ## Build Kaggle Docker Python
 	docker build -t mycares/kaggle-gpu-python:latest -f dockers/kaggle_gpu_python/Dockerfile .
 	@printf "\n\033[92mDocker Image: mycares/kaggle-gpu-python:latest\033[0m\n"
 
-
 ## ROS NOETIC
 ros_noetic_gpu: ## Build ROS Noetic
 	docker build -t mycares/ros-noetic-gpu:latest -f dockers/ros-noetic-gpu/Dockerfile .
@@ -23,4 +22,9 @@ ros_noetic_detectron2: ros_noetic_gpu ## Build Detectron2 on ROS Noetic
 mmseg: ## Build mmsegmentation
 	docker build -t mycares/mmseg:latest -f dockers/mmsegmentation/Dockerfile .
 	@printf "\n\033[92mDocker Image: mycares/mmseg:latest\033[0m\n"
+
+## Image-Segmentation
+imgseg: ## Build imgseg
+	docker build -t mycares/imgeg:latest -f dockers/imgseg/Dockerfile .
+	@printf "\n\033[92mDocker Image: mycares/imgseg:latest\033[0m\n"
 	

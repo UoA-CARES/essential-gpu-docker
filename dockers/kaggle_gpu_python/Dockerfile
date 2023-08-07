@@ -19,8 +19,8 @@ SHELL [ "/bin/bash", "-c" ]
 WORKDIR /workspace
 
 RUN pip install --upgrade setuptools pip
-RUN pip install nvidia-pyindex
-RUN pip install nvidia-tensorrt==7.2.3.4
-RUN echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/conda/lib/python3.7/site-packages/tensorrt/' >> /root/.bashrc
-RUN echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/conda/lib/python3.7/site-packages/tensorrt/' >> /opt/conda/etc/conda/activate.d/env_vars.sh
+# RUN pip install nvidia-pyindex
+# RUN pip install nvidia-tensorrt==7.2.3.4
+# RUN echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/conda/lib/python3.7/site-packages/tensorrt/' >> /root/.bashrc
+# RUN echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/conda/lib/python3.7/site-packages/tensorrt/' >> /opt/conda/etc/conda/activate.d/env_vars.sh
 # RUN python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"

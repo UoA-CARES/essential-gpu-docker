@@ -25,6 +25,6 @@ RUN git clone https://github.com/facebookresearch/detectron2.git
 RUN pip install -e detectron2
 RUN pip install pyopenssl --upgrade
 
-COPY assets/input.jpg /detectron2/demo
+COPY dockers/assets/input.jpg /detectron2/demo
 
 WORKDIR /workspace

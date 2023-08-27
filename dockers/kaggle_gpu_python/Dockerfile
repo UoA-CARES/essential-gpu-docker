@@ -1,4 +1,4 @@
-FROM gcr.io/kaggle-gpu-images/python
+FROM gcr.io/kaggle-gpu-images/python:v135
 
 ENV DEBIAN_FRONTEND noninteractive
 

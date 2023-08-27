@@ -26,7 +26,7 @@ docker run -it \
     -v /dev/shm:/dev/shm \
     -v "/tmp/.X11-unix/:/tmp/.X11-unix" \
     -v "$HOME/workspace:/workspace" \
-    mycares/kaggle-gpu-python:latest \
+    mycares/kaggle-gpu-python:v135 \
     /bin/bash
 ```
 

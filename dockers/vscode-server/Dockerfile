@@ -1,7 +1,7 @@
 # Base image
 # FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04
 # FROM mycares/kaggle-gpu-python:latest
-FROM gcr.io/kaggle-gpu-images/python:v130
+FROM gcr.io/kaggle-gpu-images/python:v132
 
 # Set working directory
 WORKDIR /
@@ -9,6 +9,9 @@ WORKDIR /
 ENV DEBIAN_FRONTEND=noninteractive \
     VSCODE_SERVE_MODE=remote
 
+
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends openssh-server
 
 # Install System Packages
 RUN apt-get update -y && \
@@ -20,12 +23,17 @@ RUN apt-get update -y && \
     git             \
     nginx           \
     tzdata          \
-    expect          \
-    openssh-server  \
+    expect          \    
     build-essential \
     # python3.10-dev python3.10-venv \
     gnome-keyring wget curl ca-certificates \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+
+
+
+    # apt-get remove -y libssl-dev openssh-client openssh-server && \
+    # apt-get install -y --no-install-recommends libssl-dev openssh-client openssh-server
+# RUN mamba install openssh -y
 
 
 # Set up Python and pip
@@ -37,10 +45,10 @@ RUN apt-get update -y && \
 
 RUN pip install --upgrade pip && pip install jupyterlab
 
-RUN pip install nvidia-pyindex
-RUN pip install nvidia-tensorrt==7.2.3.4
-RUN echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/conda/lib/python3.7/site-packages/tensorrt/' >> /root/.bashrc
-RUN echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/conda/lib/python3.7/site-packages/tensorrt/' >> /opt/conda/etc/conda/activate.d/env_vars.sh
+# RUN pip install nvidia-pyindex
+# RUN pip install nvidia-tensorrt==7.2.3.4
+# RUN echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/conda/lib/python3.7/site-packages/tensorrt/' >> /root/.bashrc
+# RUN echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/conda/lib/python3.7/site-packages/tensorrt/' >> /opt/conda/etc/conda/activate.d/env_vars.sh
 
 # Install vscode-server
 RUN wget -q -O- https://aka.ms/install-vscode-server/setup.sh | sh && \

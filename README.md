@@ -1,12 +1,12 @@
 (For the administrator instruction, please visit [here](ADMINISTRATOR.md).)
 
 # Instructions to use Workstations
-**(Important) Before [making any bookings](https://docs.google.com/spreadsheets/d/1zhHadk0wmTiC-7sPKSpjd_AZx0OvK8aj4Ujtha3rbNA/edit?usp=sharing), please contact your supervisor for approval.** If you require space in the lab, you have the option to [book a hot desk](https://docs.google.com/spreadsheets/d/16roMJnZQagsN7I5vJj-z6_1oq_aH4012/edit?usp=sharing&ouid=113035994987226744270&rtpof=true&sd=true).
+**(Important) Before [making any bookings](https://docs.google.com/spreadsheets/d/16roMJnZQagsN7I5vJj-z6_1oq_aH4012/edit?usp=sharing&ouid=110818004482752928957&rtpof=true&sd=true), please contact your supervisor for approval.** If you require space in the lab, you have the option to also book one of the hot desks through the same spreadsheet.
 
 **Note**: You must ensure that the computers are booked for the duration you expect your training to be conducted. Any docker containers running outside of a booking are subject to being **terminated** if they interfere with future bookings.
 
 ## List of GPU Workstations
-The robotics lab houses these workstations. If you have access to the lab, you can utilize these machines on-site.
+The robotics lab houses these workstations. You can utilise these machines on-site if you have access to the lab.
 
 | Name                | IP              | OS           | GPU Driver  | CUDA | GPU          | GPU Mem  |
 | ------------------  | --------------- | ------------ | ----------- | ---- | ------------ | -------- |

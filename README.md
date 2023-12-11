@@ -95,8 +95,47 @@ Replace /path/to/local/file with the path to the local file you want to transfer
 That's it! You can use similar commands to transfer files from the remote machine to your local machine or to transfer directories and their contents.
 
 ---
+## Copy file from Workstation to a Container (or in the opposite direction)
 
-## How to share data between the workstation and containers
+1. **Locate the Container ID or Name**: 
+   - Before copying anything, you need to know the ID or name of the Docker container you want to copy files to. You can list all running containers with the command:
+     ```bash
+     docker ps
+     ```
+   - This command will display a list of all active containers along with their IDs and names.
+
+3. **Use the `docker cp` Command**:
+   - The general syntax for the `docker cp` command is:
+     ```bash
+     docker cp <source-path> <container-id>:<destination-path>
+     ```
+   - Here, `<source-path>` is the path to the file or folder on your local Ubuntu machine, `<container-id>` is the ID or name of your Docker container, and `<destination-path>` is the path inside the container where you want to copy the file or folder.
+
+4. **Example**:
+   - Suppose you have a folder named `myfolder` in your home directory (`/home/username/myfolder`) and you want to copy it to a container with the ID `12345abcde` into a directory `/app` inside the container. The command would be:
+     ```bash
+     docker cp /home/username/myfolder 12345abcde:/app
+     ```
+   - This command copies `myfolder` into the `/app` directory of the container.
+
+5. **Verify the Copy**:
+   - To ensure that the file or folder has been copied successfully, you can execute a command inside the container. For example:
+     ```bash
+     docker exec -it 12345abcde ls /app
+     ```
+   - This command will list the contents of the `/app` directory inside the container, where you should see your copied folder or file.
+
+6. **Handling Permissions**:
+   - Sometimes, you might face permission issues depending on how the Docker container is set up. Ensure that the destination directory inside the container has the appropriate permissions for the operation.
+
+7. **Copying Files from Container to Host**:
+   - If you need to copy files in the opposite direction (from the container to your host system), you can reverse the source and destination in the `docker cp` command.
+
+Remember that the Docker container must be running for the `docker cp` command to work. If the container is not running, you'll need to start it first using `docker start <container-id>`.
+
+---
+
+## How to share data between the Workstation and Containers 
 
 The **'/home/$USER/data'** directory on the workstation is intended for sharing data between the workstation and containers. This directory is already mapped to a Docker volume, allowing the data to be accessed from Docker containers. You can use this directory to share training dataset between the workstation and containers. To use this volume, add the following options when starting a container:
 ```
